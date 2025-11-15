@@ -17,6 +17,6 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter"}, {
             })
 
         end
-        print("Autosave enabled - working in a git repository")`
+        print("Autosave enabled - working in a git repository")
     end,
 })	

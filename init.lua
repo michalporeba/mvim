@@ -1,4 +1,4 @@
-print("loading Michal's VIM setup (mvim)")
+print("loading Michal's NeoVim setup (mvim)")
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
