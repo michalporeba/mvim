@@ -38,3 +38,13 @@ vim.keymap.set("n", "<leader>gs", telescope.git_status, { desc = "Telescope (G)i
 
 vim.keymap.set("n", "<leader>pt", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle the (P)roject (T)ree" })
 vim.keymap.set("n", "<leader>pn", "<cmd>NvimTreeFocus<cr>", { desc = "Focus on the (P)roject (N)avigation" })
+
+vim.keymap.set("n", "<leader>vf", function()
+    vim.cmd("vsplit")
+    vim.schedule(function()
+        telescope.find_files()
+    end)
+end, { desc = "(V)ertical split with (F)ile search" })
+
+vim.keymap.set("n", "<leader>vp", "<cmd>vsplit #<cr>")
+

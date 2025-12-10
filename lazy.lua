@@ -24,7 +24,7 @@ vim.g.maplocalleader = "\\"
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    { "nvim-telescope/telescope.nvim", tag = "0.1.9", 
+    { "nvim-telescope/telescope.nvim", tag = "v0.1.9", 
       dependencies = { "nvim-lua/plenary.nvim" } 
     },
     { "nvim-treesitter/nvim-treesitter", branch = "master", lazy = "false", build = ":TSUpdate" },
