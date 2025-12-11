@@ -57,25 +57,33 @@ end)
 
 -- <leader>ll - File window to the left
 vim.keymap.set("n", "<leader>ll", function()
-  vim.cmd("topleft vsplit")
+  vim.cmd("leftabove vsplit")
   require('telescope.builtin').find_files()
 end)
 
 -- <leader>lr - File window to the right
 vim.keymap.set("n", "<leader>lr", function()
-  vim.cmd("botright vsplit")
-  require('telescope.builtin').find_files()
+  local right_term_win = find_win_by_buf(right_term_buf)
+  if right_term_win then
+    -- If right terminal exists, split left of it
+    vim.api.nvim_set_current_win(right_term_win)
+    vim.cmd("leftabove vsplit")
+    require('telescope.builtin').find_files()
+  else
+    vim.cmd("rightbelow vsplit")
+    require('telescope.builtin').find_files()
+  end
 end)
 
 -- <leader>lh - File window below
 vim.keymap.set("n", "<leader>lh", function()
-  vim.cmd("botright split")
+  vim.cmd("rightbelow split")
   require('telescope.builtin').find_files()
 end)
 
 -- <leader>lH - File window above
 vim.keymap.set("n", "<leader>lH", function()
-  vim.cmd("topleft split")
+  vim.cmd("leftabove split")
   require('telescope.builtin').find_files()
 end)
 
