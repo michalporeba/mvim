@@ -48,3 +48,22 @@ end, { desc = "(V)ertical split with (F)ile search" })
 
 vim.keymap.set("n", "<leader>vp", "<cmd>vsplit #<cr>")
 
+vim.keymap.set("t", "<Esc><Esc>", function() 
+    vim.cmd("stopinsert")
+    local file_windows = {}
+    for _, window in ipairs(vim.api.nvim_list_wins()) do
+        local buf = vim.api.nvim_win_get_buf(window)
+        if vim.bo[buf].buftype ~= "terminal" then
+            table.insert (file_windows, window)
+        end
+    end
+
+    if #file_windows > 0 then
+        vim.api.nvim_set_current_win(file_windows[1])
+    end
+end)
+
+vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h")
+vim.keymap.set("n", "<C-h>", "<C-w>h")
+vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l")
+vim.keymap.set("n", "<C-l>", "<C-w>l")

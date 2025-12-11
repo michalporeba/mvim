@@ -8,6 +8,7 @@ require("mvim.lazy")
 require("mvim.colours")
 require("mvim.remap")
 require("mvim.autosave")
+require("mvim.layouts")
 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4

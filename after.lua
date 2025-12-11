@@ -8,12 +8,13 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false
 }
 
-vim.api.nvim_create_autocmd("BufEnter", {
+vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
-        if #vim.api.nvim_list_wins() == 1 and vim.api.nvim_buf_get_name(0) == "" then
-            require("nvim-tree.api").tree.open()
+        if vim.fn.argc() == 0 and vim.fn.line2byte('$') == -1 then
+            vim.schedule(function()
+                require('telescope.builtin').find_files()
+            end)
         end
     end,
 })
-
 
