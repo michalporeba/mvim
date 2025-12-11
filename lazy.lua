@@ -51,6 +51,9 @@ require("lazy").setup({
       "nvim-lualine/lualine.nvim",
       dependencies = { "nvim-tree/nvim-web-devicons" }
     },
+    {
+      "folke/which-key.nvim"
+    },
     { 'thesimonho/kanagawa-paper.nvim', 
     	lazy = false,
         priority = 1000,

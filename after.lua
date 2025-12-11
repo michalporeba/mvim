@@ -19,4 +19,5 @@ vim.api.nvim_create_autocmd("VimEnter", {
 })
 
 require("mvim.lualine")
+require("mvim.which-key")
 
