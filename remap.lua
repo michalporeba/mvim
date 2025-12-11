@@ -1,14 +1,12 @@
 vim.g.mapleader = " "
---vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-vim.keymap.set("n", "<leader>pv", function()
-    if vim.bo.modified then
-        print("Buffer has unsaved changes")
-        return
-    end
-    vim.cmd('enew | bdelete #')
-    require('nvim-tree.api').tree.open()
+
+vim.keymap.set("n", "<leader>qq", function()
+    vim.cmd("confirm qa")
 end)
 
+vim.keymap.set("n", "<leader>bn", "<cmd>bnext<cr>")
+vim.keymap.set("n", "<leader>bp", "<cmd>bprev<cr>")
+vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>")
 vim.keymap.set("n", "<leader>o", "o<Esc>")
 
 local harpoon_mark = require("harpoon.mark")
@@ -38,15 +36,6 @@ vim.keymap.set("n", "<leader>gs", telescope.git_status, { desc = "Telescope (G)i
 
 vim.keymap.set("n", "<leader>pt", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle the (P)roject (T)ree" })
 vim.keymap.set("n", "<leader>pn", "<cmd>NvimTreeFocus<cr>", { desc = "Focus on the (P)roject (N)avigation" })
-
-vim.keymap.set("n", "<leader>vf", function()
-    vim.cmd("vsplit")
-    vim.schedule(function()
-        telescope.find_files()
-    end)
-end, { desc = "(V)ertical split with (F)ile search" })
-
-vim.keymap.set("n", "<leader>vp", "<cmd>vsplit #<cr>")
 
 vim.keymap.set("t", "<Esc><Esc>", function() 
     vim.cmd("stopinsert")

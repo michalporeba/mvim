@@ -47,6 +47,10 @@ require("lazy").setup({
             } 
         end,
     },
+    {
+      "nvim-lualine/lualine.nvim",
+      dependencies = { "nvim-tree/nvim-web-devicons" }
+    },
     { 'thesimonho/kanagawa-paper.nvim', 
     	lazy = false,
         priority = 1000,
