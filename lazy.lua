@@ -25,7 +25,20 @@ vim.g.maplocalleader = "\\"
 require("lazy").setup({
   spec = {
     { "nvim-telescope/telescope.nvim", tag = "v0.1.9", 
-      dependencies = { "nvim-lua/plenary.nvim" } 
+      dependencies = { "nvim-lua/plenary.nvim" },
+      config = function()
+        local actions = require('telescope.actions')
+        require('telescope').setup({
+          defaults = {
+            mappings = {
+              i = {
+                ["<C-s>"] = actions.toggle_selection,
+                ["<C-a>"] = actions.select_all
+              }
+            }
+          }
+        })
+      end
     },
     { "nvim-treesitter/nvim-treesitter", branch = "master", lazy = "false", build = ":TSUpdate" },
     { "theprimeagen/harpoon" },
@@ -35,6 +48,9 @@ require("lazy").setup({
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function() 
             require("nvim-tree").setup {
+                hijack_directories = {
+                    enable = false,
+                },
                 actions = {
                     open_file = {
                         quit_on_open = true,
@@ -61,6 +77,12 @@ require("lazy").setup({
             vim.cmd.colorscheme("kanagawa-paper")
         end
     },
+    {
+        dir = "~/code/hindsight",
+        config = function()
+            require('hindsight').setup()
+        end
+    }
   },
 
   -- Configure any other settings here. See the documentation for more details.

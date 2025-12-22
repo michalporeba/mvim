@@ -21,3 +21,16 @@ vim.api.nvim_create_autocmd("VimEnter", {
 require("mvim.lualine")
 require("mvim.which-key")
 
+-- Open Telescope when opening a directory instead of nvim-tree
+vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+        if vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
+            vim.schedule(function()
+                vim.cmd('cd ' .. vim.fn.argv(0))
+                require('telescope.builtin').find_files({
+                    default_text = ""  -- Start with empty search
+                })
+            end)
+        end
+    end,
+})
