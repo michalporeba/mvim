@@ -34,9 +34,6 @@ vim.keymap.set("n", "<leader>gf", telescope.git_files, { desc = "Telescope (G)it
 vim.keymap.set("n", "<leader>gb", telescope.git_branches, { desc = "Telescope (G)it (B)ranches" })
 vim.keymap.set("n", "<leader>gs", telescope.git_status, { desc = "Telescope (G)it (S)tatus" })
 
-vim.keymap.set("n", "<leader>pt", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle the (P)roject (T)ree" })
-vim.keymap.set("n", "<leader>pn", "<cmd>NvimTreeFocus<cr>", { desc = "Focus on the (P)roject (N)avigation" })
-
 vim.keymap.set("t", "<Esc><Esc>", function() 
     vim.cmd("stopinsert")
     local file_windows = {}
@@ -56,3 +53,34 @@ vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h")
 vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l")
 vim.keymap.set("n", "<C-l>", "<C-w>l")
+
+-- Navigate to same-level headers in markdown
+vim.keymap.set("n", "]=", function()
+    local current_line = vim.fn.line('.')
+    local current_level = vim.fn.getline(current_line):match('^(#+)')
+    if not current_level then return end
+    
+    for i = current_line + 1, vim.fn.line('$') do
+        local line = vim.fn.getline(i)
+        local level = line:match('^(#+)')
+        if level and #level == #current_level then
+            vim.fn.cursor(i, 1)
+            return
+        end
+    end
+end, { desc = "Next same-level header" })
+
+vim.keymap.set("n", "[=", function()
+    local current_line = vim.fn.line('.')
+    local current_level = vim.fn.getline(current_line):match('^(#+)')
+    if not current_level then return end
+    
+    for i = current_line - 1, 1, -1 do
+        local line = vim.fn.getline(i)
+        local level = line:match('^(#+)')
+        if level and #level == #current_level then
+            vim.fn.cursor(i, 1)
+            return
+        end
+    end
+end, { desc = "Previous same-level header" })

@@ -42,33 +42,17 @@ require("lazy").setup({
     },
     { "nvim-treesitter/nvim-treesitter", branch = "master", lazy = "false", build = ":TSUpdate" },
     { "theprimeagen/harpoon" },
-    { "nvim-tree/nvim-tree.lua", 
-        version = "*",
-        lazy = false,
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-        config = function() 
-            require("nvim-tree").setup {
-                hijack_directories = {
-                    enable = false,
-                },
-                actions = {
-                    open_file = {
-                        quit_on_open = true,
-                        resize_window = true,
-                        window_picker = {
-                            enable = true,
-                        }
-                    }
-                }
-            } 
-        end,
-    },
     {
       "nvim-lualine/lualine.nvim",
       dependencies = { "nvim-tree/nvim-web-devicons" }
     },
     {
       "folke/which-key.nvim"
+    },
+    {
+      "MeanderingProgrammer/render-markdown.nvim",
+      opts = {},
+      dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }
     },
     { 'thesimonho/kanagawa-paper.nvim', 
     	lazy = false,
